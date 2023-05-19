@@ -1,11 +1,16 @@
 import { Expression } from '.';
+import { Sum } from './Sum';
 
 export class Money implements Expression {
-  protected amount: number;
-  protected _currency: string;
+  private __amount: number;
+  private __currency: string;
   constructor(amount: number, currency: string) {
-    this.amount = amount;
-    this._currency = currency;
+    this.__amount = amount;
+    this.__currency = currency;
+  }
+
+  get amount() {
+    return this.__amount;
   }
 
   static dollar(amount: number): Money {
@@ -22,18 +27,22 @@ export class Money implements Expression {
   }
 
   public times(multiplier: number) {
-    return new Money(this.amount * multiplier, this._currency);
+    return new Money(this.amount * multiplier, this.__currency);
   }
 
   public toString() {
-    return this.amount + ' ' + this._currency;
+    return this.amount + ' ' + this.__currency;
   }
 
-  currency() {
-    return this._currency;
+  public currency() {
+    return this.__currency;
   }
 
-  plus(addend: Money): Expression {
-    return new Money(this.amount + addend.amount, this._currency);
+  public plus(addend: Money): Expression {
+    return new Sum(this, addend);
+  }
+
+  public reduce(to: string) {
+    return this;
   }
 }

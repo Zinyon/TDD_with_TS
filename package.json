@@ -1,9 +1,13 @@
 {
-  "name": "TDD_with_TS",
+  "name": "tdd-with-ts",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/Zinyon/TDD_with_TS.git",
   "license": "MIT",
+  "author": {
+    "name": "Jin Young Park",
+    "email": "jy2045@sogang.ac.kr"
+  },
   "scripts": {
     "test:watch": "yarn jest --watchAll"
   },

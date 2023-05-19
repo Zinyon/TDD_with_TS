@@ -3,10 +3,8 @@ import { Dollar } from './Dollar';
 describe('Money Test', () => {
   it('test multiplication', () => {
     const five = new Dollar(5);
-    let product = five.times(2);
-    expect(product.amount).toBe(10);
-    product = five.times(3);
-    expect(product.amount).toBe(15);
+    expect(new Dollar(10)).toStrictEqual(five.times(2));
+    expect(new Dollar(15)).toStrictEqual(five.times(3));
   });
 
   it('test equality', () => {

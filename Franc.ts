@@ -1,7 +1,7 @@
 import { Money } from '.';
 
 export class Franc extends Money {
-  public times(multiplier: number): Money {
-    return new Franc(this.amount * multiplier);
+  times(multiplier: number): Money {
+    return Money.franc(this.amount * multiplier);
   }
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { Money, Franc } from '.';
+import { Money } from '.';
 
 describe('Money Test', () => {
   it('test multiplication', () => {
@@ -11,14 +11,19 @@ describe('Money Test', () => {
   it('test equality', () => {
     expect(Money.dollar(5).equals(Money.dollar(5))).toBe(true);
     expect(Money.dollar(5).equals(Money.dollar(6))).toBe(false);
-    expect(new Franc(5).equals(new Franc(5))).toBe(true);
-    expect(new Franc(5).equals(new Franc(6))).toBe(false);
-    expect(new Franc(5).equals(Money.dollar(5))).toBe(false);
+    expect(Money.franc(5).equals(Money.franc(5))).toBe(true);
+    expect(Money.franc(5).equals(Money.franc(6))).toBe(false);
+    expect(Money.franc(5).equals(Money.dollar(5))).toBe(false);
   });
 
   it('test franc multiplication', () => {
-    const five = new Franc(5);
-    expect(new Franc(10)).toStrictEqual(five.times(2));
-    expect(new Franc(15)).toStrictEqual(five.times(3));
+    const five = Money.franc(5);
+    expect(Money.franc(10)).toStrictEqual(five.times(2));
+    expect(Money.franc(15)).toStrictEqual(five.times(3));
+  });
+
+  it('test currency', () => {
+    expect(Money.dollar(1).currency()).toBe('USD');
+    expect(Money.franc(1).currency()).toBe('CHF');
   });
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { Money } from '.';
+import { Franc, Money } from '.';
 
 describe('Money Test', () => {
   it('test multiplication', () => {
@@ -25,5 +25,9 @@ describe('Money Test', () => {
   it('test currency', () => {
     expect(Money.dollar(1).currency()).toBe('USD');
     expect(Money.franc(1).currency()).toBe('CHF');
+  });
+
+  it('test different class equality', () => {
+    expect(new Money(10, 'CHF').equals(new Franc(10, 'CHF')));
   });
 });

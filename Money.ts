@@ -1,7 +1,6 @@
 import { Dollar, Franc } from '.';
 
-export abstract class Money {
-  abstract times(amount: number): Money;
+export class Money {
   protected amount: number;
   protected _currency: string;
   constructor(amount: number, currency: string) {
@@ -19,7 +18,15 @@ export abstract class Money {
 
   public equals(object: Object): boolean {
     const money = object as Money;
-    return this.amount === money.amount && (this as {}).constructor.name === (money as {}).constructor.name;
+    return this.amount === money.amount && this.currency() === money.currency();
+  }
+
+  public times(multiplier: number) {
+    return new Money(this.amount * multiplier, this._currency);
+  }
+
+  public toString() {
+    return this.amount + ' ' + this._currency;
   }
 
   currency() {

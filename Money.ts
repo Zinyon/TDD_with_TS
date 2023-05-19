@@ -26,7 +26,7 @@ export class Money implements Expression {
     return this.amount === money.amount && this.currency() === money.currency();
   }
 
-  public times(multiplier: number) {
+  public times(multiplier: number): Expression {
     return new Money(this.amount * multiplier, this.__currency);
   }
 
@@ -38,13 +38,13 @@ export class Money implements Expression {
     return this.__currency;
   }
 
-  public plus(addend: Money): Expression {
+  public plus(addend: Expression): Expression {
     return new Sum(this, addend);
   }
 
   public reduce(bank: Bank, to: string) {
     const rate = bank.rate(this.__currency, to);
 
-    return new Money(this.__amount / rate, to);
+    return new Money(this.__amount / (rate || 1), to);
   }
 }

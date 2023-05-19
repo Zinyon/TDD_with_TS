@@ -64,4 +64,21 @@ describe('Money Test', () => {
   it('test identity rate', () => {
     expect(new Bank().rate('USD', 'USD')).toBe(1);
   });
+
+  it('test different currency rate', () => {
+    const bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const rate = bank.rate('CHF', 'USD');
+
+    expect(rate).toBe(2);
+  });
+
+  it('test mixed addition', () => {
+    const fiveBucks = Money.dollar(5);
+    const tenFrancs = Money.franc(10);
+    const bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const result = bank.reduce(fiveBucks.plus(tenFrancs), 'USD');
+    expect(Money.dollar(10)).toStrictEqual(result);
+  });
 });

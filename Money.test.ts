@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals';
-import { Money } from '.';
+import { Money, Bank } from '.';
 
 describe('Money Test', () => {
   it('test multiplication', () => {
@@ -23,5 +23,13 @@ describe('Money Test', () => {
   it('test currency', () => {
     expect(Money.dollar(1).currency()).toBe('USD');
     expect(Money.franc(1).currency()).toBe('CHF');
+  });
+
+  it('test simple addition', () => {
+    const five = Money.dollar(5);
+    const sum = five.plus(five);
+    const bank = new Bank();
+    const reduced = bank.reduce(sum, 'USD');
+    expect(Money.dollar(10)).toStrictEqual(reduced);
   });
 });

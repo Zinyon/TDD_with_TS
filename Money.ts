@@ -6,6 +6,6 @@ export class Money {
 
   public equals(object: Object): boolean {
     const money = object as Money;
-    return this.amount === money.amount;
+    return this.amount === money.amount && (this as {}).constructor.name === (money as {}).constructor.name;
   }
 }

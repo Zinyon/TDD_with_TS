@@ -1,4 +1,4 @@
-import { Bank, Expression } from '.';
+import { Bank, Expression } from './Money';
 import { Sum } from './Sum';
 
 export class Money implements Expression {

@@ -1,15 +1,15 @@
 import { Bank, Expression, Money } from '.';
 
 export class Sum implements Expression {
-  augend: Expression;
-  addend: Expression;
+  private __augend: Expression;
+  private __addend: Expression;
   constructor(augend: Expression, addend: Expression) {
-    this.augend = augend;
-    this.addend = addend;
+    this.__augend = augend;
+    this.__addend = addend;
   }
 
   public reduce(bank: Bank, to: string): Money {
-    const amount = this.augend.reduce(bank, to).amount + this.addend.reduce(bank, to).amount;
+    const amount = this.__augend.reduce(bank, to).amount + this.__addend.reduce(bank, to).amount;
     return new Money(amount, to);
   }
 

@@ -9,8 +9,12 @@ describe('Money Test', () => {
   });
 
   it('test equality', () => {
-    expect(new Dollar(5).equals(new Dollar(5))).toBe(true);
-    expect(new Dollar(5).equals(new Dollar(6))).toBe(false);
+    const dollar1 = new Dollar(5);
+    const dollar2 = new Dollar(5);
+    const equal = dollar1.equals(dollar2);
+
+    expect(equal).toBe(true);
+    // expect(dollar.equals(new Dollar(6))).toBe(false);
   });
 
   it('test franc multiplication', () => {

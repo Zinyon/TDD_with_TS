@@ -37,8 +37,8 @@ describe('Money Test', () => {
     const five = Money.dollar(5);
     const result = five.plus(five);
     const sum = result as Sum;
-    expect(five).toBe(sum.augend);
-    expect(five).toBe(sum.addend);
+    expect(five).toBe(sum['__augend']);
+    expect(five).toBe(sum['__addend']);
   });
 
   it('test reduce sum', () => {
@@ -80,5 +80,25 @@ describe('Money Test', () => {
     bank.addRate('CHF', 'USD', 2);
     const result = bank.reduce(fiveBucks.plus(tenFrancs), 'USD');
     expect(Money.dollar(10)).toStrictEqual(result);
+  });
+
+  it('test sum plus money', () => {
+    const fiveBucks = Money.dollar(5);
+    const tenFrancs = Money.franc(10);
+    const bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+    const result = bank.reduce(sum, 'USD');
+    expect(Money.dollar(15)).toStrictEqual(result);
+  });
+
+  it('test sum times', () => {
+    const fiveBucks = Money.dollar(5);
+    const tenFrancs = Money.franc(10);
+    const bank = new Bank();
+    bank.addRate('CHF', 'USD', 2);
+    const sum = new Sum(fiveBucks, tenFrancs).times(2);
+    const result = bank.reduce(sum, 'USD');
+    expect(Money.dollar(20)).toStrictEqual(result);
   });
 });

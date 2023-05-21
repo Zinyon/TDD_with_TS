@@ -13,7 +13,11 @@ export class Sum implements Expression {
     return new Money(amount, to);
   }
 
-  public plus(addend: Expression) {
-    return null;
+  public plus(addend: Expression): Expression {
+    return new Sum(this, addend);
+  }
+
+  public times(multiplier: number): Expression {
+    return new Sum(this.__augend.times(multiplier), this.__addend.times(multiplier));
   }
 }

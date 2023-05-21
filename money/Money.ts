@@ -1,6 +1,4 @@
-import { Bank, Expression } from './Money';
-import { Sum } from './Sum';
-
+import { Bank, Expression, Sum } from '.';
 export class Money implements Expression {
   private __amount: number;
   private __currency: string;
